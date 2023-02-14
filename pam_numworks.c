@@ -9,6 +9,12 @@
 
 int pam_sm_authenticate(pam_handle_t *pamh, int flags, int argc, const char **argv)
 {
+
+    if (argc == 0) {
+        fprintf(stdout, "ERROR: Missing serial number in pam.d rules for current application !");
+        return PAM_AUTH_ERR;
+    }
+
     libusb_device_handle *device = NULL;
     int status = libusb_init(NULL);
     if (status != 0)
@@ -47,7 +53,7 @@ int pam_sm_authenticate(pam_handle_t *pamh, int flags, int argc, const char **ar
         return PAM_AUTH_ERR;
     }
 
-    if (strcmp(serial, myNumWorksSerial) == 0)
+    if (strcmp(serial, argv[0]) == 0)
     {
         libusb_close(device);
         libusb_exit(NULL);
