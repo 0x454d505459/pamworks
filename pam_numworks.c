@@ -4,8 +4,6 @@
 #include <libusb-1.0/libusb.h>
 #include <security/pam_modules.h>
 
-// Replace with your numwork's serial number
-#define myNumWorksSerial "KABCABFRMTUxNzky"
 
 int pam_sm_authenticate(pam_handle_t *pamh, int flags, int argc, const char **argv)
 {
